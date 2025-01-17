@@ -1,0 +1,54 @@
+.cover {
+    position: relative;
+    background-color: white;
+    width: 100%;
+    height: 70vh;
+    padding: 20px;
+}
+
+.cover .hero-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 3%;
+    background-image: url('/image/hero-image/banner1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.btn-hero-image {
+    display: flex;
+    justify-content: center; 
+    position: absolute; /* ใช้ absolute positioning เพื่อจัดตำแหน่ง */
+    bottom: 10px;
+    left: 50%; /* ตำแหน่งแนวนอนตรงกลาง */
+    transform: translateX(-50%); /* เลื่อนปุ่มให้ตรงกลางคอนเทนเนอร์ */
+    padding: 10px;
+    flex-wrap: wrap; /* ปุ่มสามารถแสดงในหลายแถวได้ */
+}
+
+.btn-hero-image button {
+    margin: 8px; /* ลดช่องว่างระหว่างปุ่ม */
+}
+
+.btn-banner {
+    width: 30px; 
+    height: 30px;
+    border-radius: 50%;
+    border-width: 2px; 
+    border-color: white;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-banner:hover {
+    background-color: #ffffff;
+    border-color: white;
+    color: white;
+}
+
+/* สีที่ปุ่มจะคงไว้เมื่อถูกกด */
+.btn-banner.active {
+    background-color: #ffffff;
+    border-color: white;
+}

@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  fName     String?
+  lName     String?
+  password  String
+  email     String     @unique
+  telNo     String?
+  address   String?
+  orders    Order[]
+  cartItems Cartitem[]
+  role      String     @default("user")
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Product {
+  id          Int        @id @default(autoincrement())
+  name        String     
+  description String?
+  price       Float?
+  picture     String?
+  stock       Int?       @default(0)
+  cartItems   Cartitem[]
+  sold        Int?       @default(0)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  category    Category  @relation(fields: [categoryId], references: [id] , onDelete: Cascade)
+  categoryId  Int
+}
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Cartitem {
+  id         Int      @id @default(autoincrement())
+  product    Product  @relation(fields: [prodId], references: [id] , onDelete: Cascade)
+  prodId     Int
+  quantity   Int
+  totalPrice Float
+  status     String   @default("อยู่ในตะกร้า")
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId    Int
+  userBy     User     @relation(fields: [userById], references: [id])
+  userById   Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Order {
+  id           Int        @id @default(autoincrement())
+  cart         Cartitem[]
+  netPrice     Float
+  transferDate String?
+  proofPicture String?
+  proofDate    String?
+  status       String     @default("รอการชำระเงิน")
+  buyDate      String?    
+  userBy       User       @relation(fields: [userById], references: [id])
+  userById     Int
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}

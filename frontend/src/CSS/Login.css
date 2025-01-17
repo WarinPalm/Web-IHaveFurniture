@@ -1,0 +1,15 @@
+.login-form{
+    border-radius: 5%;
+}
+.input-login{
+    border-color: #a18e81;
+    padding: 10px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); 
+}
+.bg-login{
+    height: calc(100vh - 7vh - 5vh - 7vh); /*  nav1 + nav2 + footer*/
+    background-image: url('/image/Other/bglogin.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
